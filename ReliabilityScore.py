@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Module to process raw accelerometer files into readable data."""
+"""Module to calculate reliability of samples of raw accelerometer files."""
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import datetime
