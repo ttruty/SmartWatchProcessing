@@ -37,6 +37,9 @@ Example:
  Produces:
  > $ Reliability for data set = 0.9988838008013737
 
+ > A csv file with the naming convention: ```"reliability_plot_" + base_input_name + "_" + timestamp + ".png"``` with the second epoch reliability scores
+ 
+
  > !["Reliability Plot"](images/reliability_plot.png "Reliability Plot")
 
 ### Energy Calculation and Wear Time
@@ -52,6 +55,8 @@ Capture Segment Periods:
 | 1     | 2019-11-12 18:48:06.338 | 2019-11-12 23:06:41.912 | False
 | 2     | 2019-11-12 23:06:41.933      |   2019-11-12 23:34:55.143 | True
 | 3 | 2019-11-12 23:34:55.193      |    2019-11-12 23:34:55.143 | False
+
+> A csv file with the naming convention: ```"non_wear_time_plot_" + base_input_name + "_" + timestamp + ".png"``` with the start and stop time stamps for wear times and non-wear time periods.
 
  > !["Reliability Plot"](images/non-wear_plot.png "Reliability Plot")
 
