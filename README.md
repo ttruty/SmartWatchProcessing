@@ -12,9 +12,9 @@ A tool to process data from a wrist worn wearable device.
 The tool is used to extract meaningful data about accelerometer data.
 
 ## Installation
-Dependancies include: 
+Dependencies include: 
 - [Python 3](https://www.python.org/downloads/) (3.7.4 used)
-- - Python dependancies:
+- - Python dependencies:
     - Pandas
     - Numpy
     - Matplotlib
