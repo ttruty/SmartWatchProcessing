@@ -64,11 +64,14 @@ Capture Segment Periods:
 
 ### Energy calculation and wear time measures
 - [EnergyCalculation](EnergyCalculation.py)
-- Data is smoothed using a moving average
+- Data is smoothed using a moving average.
 - Initial non-wear time calculations were to be completed using using threshold with vector magnitude.
+- This energy measure = square root of the sum of squares of each accelerometer axis.
+- Energy measure is blue signal on plot.
 - A most robust method to calculate non-wear time was applied using standard deviations of each axis.
 - If 2 of the 3 axes STD was below 13 mg for at least 5 minutes it is labeled as "non-wear time" <sup>[1] [2]</sup>
 - This is using a 5 minute time window
+- Non-wear time is highlighted in red on plot.
 
 ## Future Work
 - Allowing positional parameters with calling python scripts allows for automation of task, even creating a cron job to run daily to calculate non wear time.
