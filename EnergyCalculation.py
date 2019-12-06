@@ -78,19 +78,44 @@ def energy_calculations(input_file):
 
     # new df from all non-wear periods
     data = { "Start": non_wear_starts_list, "Stop": non_wear_stops_list}
-    df_non_wear=pd.DataFrame(data)
+    df_non_wear=pd.DataFrame(data) # new df for non-wear start/stop times
     df_non_wear['delta'] = [pd.Timedelta(x) for x in (df_non_wear["Stop"]) - pd.to_datetime(df_non_wear["Start"])]
 
     # check if non-wear is longer than target
-    valid_no_wear = df_non_wear["delta"] > datetime.timedelta(minutes=5) #greater than 5 minutes
+    valid_no_wear = df_non_wear["delta"] > datetime.timedelta(minutes=5) # greater than 5 minutes
     no_wear_timestamps=df_non_wear[valid_no_wear]
 
     # list of valid non-wear starts and stops
     non_wear_start = no_wear_timestamps["Start"]
     non_wear_stop = no_wear_timestamps["Stop"]
 
+    # calculate total capture time
+    capture_time_df = df[['Time']].copy()
+    # capture_time_df = capture_time_df.set_index('Time')
+
     # plot non-wear periods
-    ax.axvspan(non_wear_start, non_wear_stop, alpha=0.5, color='red')
+    for non_start, non_stop in zip(non_wear_start, non_wear_stop):
+        capture_time_df['Non_Wear'] = (capture_time_df['Time'] > non_start ) & (capture_time_df['Time'] < non_stop )
+        ax.axvspan(non_start, non_stop, alpha=0.5, color='red')
+
+    # blocking validated wear and non wear time
+    capture_time_df['block'] = (capture_time_df['Non_Wear'].astype(bool).shift() != capture_time_df['Non_Wear'].astype(bool)).cumsum()  # checks if next index label is different from previous
+    capture_time_df.assign(output=capture_time_df.groupby(['block']).Time.apply(lambda x: x - x.iloc[0]))  # calculate the time of each sample in blocks
+    # times of blocks
+    start_time_df = capture_time_df.groupby(['block']).first()  # start times of each blocked segment
+    stop_time_df = capture_time_df.groupby(['block']).last()  # stop times for each blocked segment
+
+
+    start_time_df.rename(columns={'Time': 'StartTime'}, inplace=True)
+    stop_time_df.rename(columns={'Time': 'StopTime'}, inplace=True)
+
+    # combine start and stop dataframes
+    time_marks = pd.concat([start_time_df, stop_time_df], axis=1)
+    print("Capture Segment Periods:")
+    print(time_marks)
+
+    #save csv of individual time periods (worn and non-worn timestamps
+    time_marks.to_csv("wear_periods_csv_" + base_input_name + "_" + timestamp + ".csv")
 
     # save png image
     plt.savefig("non_wear_time_plot_" + base_input_name + "_" + timestamp + ".png", bbox_inches='tight')
