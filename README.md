@@ -66,15 +66,15 @@ Capture Segment Periods:
 - Data is smoothed using a moving average
 - Initial non-wear time calculations were to be completed using using threshold with vector magnitude.
 - A most robust method to calculate non-wear time was applied using standard deviations of each axis.
-- If 2 of the 3 axes was below a threshold of 13 mg for at least 5 minutes it is labeled as "non-wear time" [^fn] [^fn2] [^fn3]
+- If 2 of the 3 axes was below a threshold of 13 mg for at least 5 minutes it is labeled as "non-wear time" ([#1][i1]) ([#2][i2]) ([#3][i3])
 - This is using a 5 minute time window
 
 
 ## References
 
-[^fn1]: Zhou S, Hill RA, Morgan K, et alClassification of accelerometer wear and non-wear events in seconds for monitoring free-living physical activity BMJ Open 2015;5:e007447. https://doi.org/10.1136/bmjopen-2014-007447
+[i1]: Zhou S, Hill RA, Morgan K, et alClassification of accelerometer wear and non-wear events in seconds for monitoring free-living physical activity BMJ Open 2015;5:e007447. https://doi.org/10.1136/bmjopen-2014-007447
 
-[^fn2]: van Hees VT, Renström F, Wright A, Gradmark A, Catt M, Chen KY, et al. (2011) Estimation of Daily Energy Expenditure in Pregnant and Non-Pregnant Women Using a Wrist-Worn Tri-Axial Accelerometer. PLoS ONE 6(7): e22922. https://doi.org/10.1371/journal.pone.0022922
+[i2]: van Hees VT, Renström F, Wright A, Gradmark A, Catt M, Chen KY, et al. (2011) Estimation of Daily Energy Expenditure in Pregnant and Non-Pregnant Women Using a Wrist-Worn Tri-Axial Accelerometer. PLoS ONE 6(7): e22922. https://doi.org/10.1371/journal.pone.0022922
 
-[^fn3]: Inácio CM da Silva, Vincent T van Hees, Virgílio V Ramires, Alan G Knuth, Renata M Bielemann, Ulf Ekelund, Soren Brage, Pedro C Hallal, Physical activity levels in three Brazilian birth cohorts as assessed with raw triaxial wrist accelerometry, International Journal of Epidemiology, Volume 43, Issue 6, December 2014, Pages 1959–1968, https://doi.org/10.1093/ije/dyu203
+[i3]: Inácio CM da Silva, Vincent T van Hees, Virgílio V Ramires, Alan G Knuth, Renata M Bielemann, Ulf Ekelund, Soren Brage, Pedro C Hallal, Physical activity levels in three Brazilian birth cohorts as assessed with raw triaxial wrist accelerometry, International Journal of Epidemiology, Volume 43, Issue 6, December 2014, Pages 1959–1968, https://doi.org/10.1093/ije/dyu203
 
