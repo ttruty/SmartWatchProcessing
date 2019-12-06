@@ -24,7 +24,8 @@ Dependancies include:
 Clone the Repo
 > $ git clone https://github.com/ttruty/SmartWatchProcessing.git
 
-Sample data is has been added to the repo and can be tested with the commands from the cli, terminal, powershell, or other cli tool.
+Sample data is has been added to the repo and can be tested with the commands from the terminal, powershell, or other cli tool.
+Running software shows the plot with matplotlib allowing for zoom and pan.
 
 Sample data located at [acc_data.csv](acc_data.csv), was processed to combine data from each hour long segment into full measure period. This can be accomplished on data using [ConcatData](ConcatData.py).
 
@@ -66,15 +67,19 @@ Capture Segment Periods:
 - Data is smoothed using a moving average
 - Initial non-wear time calculations were to be completed using using threshold with vector magnitude.
 - A most robust method to calculate non-wear time was applied using standard deviations of each axis.
-- If 2 of the 3 axes STD was below a threshold of 13 mg for at least 5 minutes it is labeled as "non-wear time" <sup>[1] [2] [3]</sup>
+- If 2 of the 3 axes STD was below 13 mg for at least 5 minutes it is labeled as "non-wear time" <sup>[1] [2]</sup>
 - This is using a 5 minute time window
+
+## Future Work
+- Allowing positional parameters with calling python scripts allows for automation of task, even creating a cron job to run daily to calculate non wear time.
+- If data is streamed to server on a regular basis this algorithm could be combined with AWS Lambda and SNS services to alert the wearer via text message that "non-wear time is high and to please wear the device". 
+- Non-wear algorithm can be expanded upon to see the most suitable STD for purpose, as some studies that used this method changed based on research populations. <sup>[3]</sup>
 
 
 ## References
 
-[1]: Zhou S, Hill RA, Morgan K, et alClassification of accelerometer wear and non-wear events in seconds for monitoring free-living physical activity BMJ Open 2015;5:e007447. https://doi.org/10.1136/bmjopen-2014-007447
+[1]: Zhou S, Hill RA, Morgan K, et al Classification of accelerometer wear and non-wear events in seconds for monitoring free-living physical activity BMJ Open 2015;5:e007447. https://doi.org/10.1136/bmjopen-2014-007447
 
-[2]: van Hees VT, Renström F, Wright A, Gradmark A, Catt M, Chen KY, et al. (2011) Estimation of Daily Energy Expenditure in Pregnant and Non-Pregnant Women Using a Wrist-Worn Tri-Axial Accelerometer. PLoS ONE 6(7): e22922. https://doi.org/10.1371/journal.pone.0022922
+[2]: Inácio CM da Silva, Vincent T van Hees, Virgílio V Ramires, Alan G Knuth, Renata M Bielemann, Ulf Ekelund, Soren Brage, Pedro C Hallal, Physical activity levels in three Brazilian birth cohorts as assessed with raw triaxial wrist accelerometry, International Journal of Epidemiology, Volume 43, Issue 6, December 2014, Pages 1959–1968, https://doi.org/10.1093/ije/dyu203
 
-[3]: Inácio CM da Silva, Vincent T van Hees, Virgílio V Ramires, Alan G Knuth, Renata M Bielemann, Ulf Ekelund, Soren Brage, Pedro C Hallal, Physical activity levels in three Brazilian birth cohorts as assessed with raw triaxial wrist accelerometry, International Journal of Epidemiology, Volume 43, Issue 6, December 2014, Pages 1959–1968, https://doi.org/10.1093/ije/dyu203
-
+[3]: van Hees VT, Renström F, Wright A, Gradmark A, Catt M, Chen KY, et al. (2011) Estimation of Daily Energy Expenditure in Pregnant and Non-Pregnant Women Using a Wrist-Worn Tri-Axial Accelerometer. PLoS ONE 6(7): e22922. https://doi.org/10.1371/journal.pone.0022922
