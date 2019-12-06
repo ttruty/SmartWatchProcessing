@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Module to process raw accelerometer files into readable data."""
+"""Module to calculate energy and non-wear time of accelerometer data."""
 
 import os
 import pandas as pd
