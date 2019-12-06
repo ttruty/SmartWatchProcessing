@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Module to process raw accelerometer files into readable data."""
 
+import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -12,15 +13,30 @@ def main():
     """
     Application entry point responsible for parsing command line requests
     """
-    parser = argparse.ArgumentParser(description='Process accelerometer data.')
+    parser = argparse.ArgumentParser(description='Process Non-wear-time accelerometer data.')
     parser.add_argument('input_file', metavar='file', type=str, nargs='+',
                         help='filename for csv accelerometer data')
 
+    # parse command line arguments
     args = parser.parse_args()
-    print(args.accumulate(args.integers))
+    for file in args.input_file:
+        energy_calculations(file)
 
-    df = pd.read_csv("acc_data.csv") # read data
+def energy_calculations(input_file):
+    """calculate energy and non-wear time stamps based on input file
+                :param str input_file:  CSV from provided dataset
+                :return: New file written to csv output naming convention and new png image of plot
+                :rtype: void
+    """
+    df = pd.read_csv(input_file) # read data
     df['Time'] = pd.to_datetime(df['Time'], unit='ms') # convert timestamp to datetime object
+
+    # save file name
+    base_input_name = os.path.splitext(input_file)[0]
+
+    # timestamp for filename
+    now = datetime.datetime.now()
+    timestamp = str(now.strftime("%Y%m%d_%H-%M-%S"))
 
     # Simple smoothing signal with rolling window
     # use rolling window of 10 samples ~ .5 second
@@ -76,7 +92,11 @@ def main():
     # plot non-wear periods
     ax.axvspan(non_wear_start, non_wear_stop, alpha=0.5, color='red')
 
+    # save png image
+    plt.savefig("non_wear_time_plot_" + base_input_name + "_" + timestamp + ".png", bbox_inches='tight')
+
     #show plot
+    plt.title("Non-wear Time")
     plt.show()
 
 if __name__ == '__main__':
