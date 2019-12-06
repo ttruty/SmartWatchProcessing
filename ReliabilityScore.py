@@ -12,24 +12,22 @@ def main():
     Application entry point responsible for parsing command line requests
     """
     parser = argparse.ArgumentParser(description='Process accelerometer data.')
-    parser.add_argument('sample_rate', metavar='sample', type=int, nargs='?', default=20,
-                        help='Sample rate for target device data')
     parser.add_argument('input_file', metavar='file', type=str, nargs='+',
                         help='filename for csv accelerometer data')
 
     # parse command line arguments
     args = parser.parse_args()
     for file in args.input_file:
-        reliability_score(file, args.sample_rate)
+        reliability_score(file)
 
 
-def reliability_score(input_file, sampling_rate):
-    """calculate reliability score based on input file
+def reliability_score(input_file):
+    """ calculate reliability score based on input file
             :param str input_file:  CSV from provided dataset
-            :param int sampling_rate: device sample rate in Hz
             :return: New file written to csv output naming convention and new png image of plot
             :rtype: void
     """
+    sampling_rate=20 # Sample rate (Hz) for target device data
 
     # save file name
     base_input_name = os.path.splitext(input_file)[0]
@@ -62,6 +60,7 @@ def reliability_score(input_file, sampling_rate):
     plt.savefig("reliability_plot_" + base_input_name + "_" + timestamp + ".png", bbox_inches='tight')
 
     #show plot
+    plt.title("Reliability Score by Second")
     plt.show()
 
 if __name__ == '__main__':
